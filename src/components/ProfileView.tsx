@@ -69,53 +69,55 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
   };
 
   return (
-    <div id="profile-view-tab" className="px-5 py-4 animate-fade-in space-y-5">
+    <div id="profile-view-tab" className="px-5 py-5 animate-fade-in space-y-6 bg-white">
       
       {/* Short Warm Intro */}
-      <div id="profile-hero" className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
-        <div className="absolute right-0 bottom-0 translate-x-4 translate-y-4 opacity-10">
-          <HeartPulse className="w-40 h-40" />
-        </div>
-        <div className="relative z-10 space-y-3">
-          <div className="flex gap-1.5 items-center">
-            <span className="bg-amber-500/10 text-amber-400 text-[10px] font-mono tracking-widest uppercase font-semibold border border-amber-500/20 px-2 py-0.5 rounded-full">
-              Asisten Gizi Anda
-            </span>
+      <div id="profile-hero" className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <div className="h-12 w-12 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-500">
+              <HeartPulse className="w-6 h-6" />
+            </div>
+            <div className="space-y-1">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                Profil Kesehatan
+              </span>
+              <h2 className="text-lg font-semibold text-slate-900">
+                Halo, {currentUser?.fullName || 'Sahabat Sehat'}!
+              </h2>
+              <p className="text-xs text-slate-500 leading-relaxed max-w-[220px]">
+                Data medis Anda membantu kami menyajikan rekomendasi gizi yang lebih akurat dan aman.
+              </p>
+            </div>
           </div>
-          <h2 className="text-xl font-bold font-display leading-tight">
-            Halo, {currentUser?.fullName || 'Sahabat Sehat'}!
-          </h2>
-          <p className="text-xs text-slate-300 leading-relaxed">
-            Pilah asupan makanan lokal andalan secara akurat. Data medis disinkronkan secara real-time untuk memandu deteksi risiko seseuai kondisi medis utama Anda.
-          </p>
           {onLogout && (
             <button 
               onClick={onLogout}
-              className="mt-3 px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-200 border border-red-500/25 rounded-xl text-[10px] font-bold transition-all active:scale-95 flex items-center gap-1.5 hover:cursor-pointer"
+              className="px-3 py-1.5 text-[10px] font-semibold text-rose-600 border border-rose-200 rounded-full hover:bg-rose-50 transition-all"
             >
-              <span>Keluar Akun (Logout)</span>
+              Keluar
             </button>
           )}
         </div>
       </div>
 
       {/* Profil Form */}
-      <div id="profile-form-container" className="glass p-5 rounded-3xl space-y-5">
-        <div className="flex items-center gap-2 pb-4 mb-2 border-b border-slate-250/40">
-          <UserCircle2 className="w-5 h-5 text-red-500" />
-          <h3 className="text-sm font-bold text-slate-900 font-display">
+      <div id="profile-form-container" className="rounded-3xl border border-slate-200 bg-white p-5 space-y-5 shadow-sm">
+        <div className="flex items-center gap-2 pb-4 mb-2 border-b border-slate-200">
+          <UserCircle2 className="w-5 h-5 text-rose-500" />
+          <h3 className="text-sm font-semibold text-slate-900">
             Pengaturan Medis & Profil Akun
           </h3>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Section 1: Identitas Diri */}
-          <div className="space-y-3.5 p-3.5 bg-slate-50/50 rounded-2xl border border-slate-100">
-            <span className="text-[10px] font-black text-slate-400 block tracking-wider uppercase">I. Identitas Akun</span>
+          <div className="space-y-3.5 p-4 bg-white rounded-2xl border border-slate-200">
+            <span className="text-[10px] font-semibold text-slate-400 block tracking-wider uppercase">Identitas Akun</span>
             
             {/* Full Name */}
             <div className="space-y-1">
-              <label id="label-fullname" htmlFor="input-fullname" className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+              <label id="label-fullname" htmlFor="input-fullname" className="text-[11px] font-semibold text-slate-700 flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5 text-slate-400" />
                 Nama Sapaan Lengkap
               </label>
@@ -126,13 +128,13 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Contoh: Bpk. Made Wiratman (48th)"
                 required
-                className="w-full bg-white/75 border border-slate-200 focus:border-red-500 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300 shadow-xs"
+                className="w-full bg-white border border-slate-200 focus:border-slate-400 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300"
               />
             </div>
 
             {/* Email Address */}
             <div className="space-y-1">
-              <label id="label-email" htmlFor="input-email" className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+              <label id="label-email" htmlFor="input-email" className="text-[11px] font-semibold text-slate-700 flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-slate-400" />
                 Alamat Email Aktif
               </label>
@@ -143,17 +145,17 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Contoh: made.wira@gmail.com"
                 required
-                className="w-full bg-white/75 border border-slate-200 focus:border-red-500 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300 shadow-xs"
+                className="w-full bg-white border border-slate-200 focus:border-slate-400 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300"
               />
             </div>
           </div>
 
           {/* Section 2: Batasan Alergi */}
-          <div className="space-y-3.5 p-3.5 bg-slate-50/50 rounded-2xl border border-slate-100">
-            <span className="text-[10px] font-black text-slate-400 block tracking-wider uppercase">II. Alergi Bawaan Makanan</span>
+          <div className="space-y-3.5 p-4 bg-white rounded-2xl border border-slate-200">
+            <span className="text-[10px] font-semibold text-slate-400 block tracking-wider uppercase">Alergi Bawaan Makanan</span>
             
             <div className="space-y-1">
-              <label id="label-allergies" htmlFor="input-allergies" className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+              <label id="label-allergies" htmlFor="input-allergies" className="text-[11px] font-semibold text-slate-700 flex items-center gap-1.5">
                 <ShieldAlert className="w-3.5 h-3.5 text-rose-500" />
                 Alergi yang Terdaftar
               </label>
@@ -163,21 +165,21 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
                 value={allergies}
                 onChange={(e) => setAllergies(e.target.value)}
                 placeholder="Contoh: Udang, Kacang Tanah, susu sapi laktosa"
-                className="w-full bg-white/75 border border-slate-200 focus:border-red-500 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300 shadow-xs"
+                className="w-full bg-white border border-slate-200 focus:border-slate-400 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300"
               />
-              <p className="text-[9.5px] text-slate-400 leading-relaxed font-semibold">
+              <p className="text-[9.5px] text-slate-400 leading-relaxed">
                 *Pisahkan dengan koma. Alergi ini dibaca otomatis oleh sensor AI saat Anda memindai hidangan warteg.
               </p>
             </div>
           </div>
 
           {/* Section 3: Pengaturan Medis */}
-          <div className="space-y-3.5 p-3.5 bg-slate-50/50 rounded-2xl border border-slate-100">
-            <span className="text-[10px] font-black text-slate-400 block tracking-wider uppercase">III. Kondisi Klinis & Target</span>
+          <div className="space-y-3.5 p-4 bg-white rounded-2xl border border-slate-200">
+            <span className="text-[10px] font-semibold text-slate-400 block tracking-wider uppercase">Kondisi Klinis & Target</span>
 
             {/* Diagnosis Dropdown */}
             <div className="space-y-1">
-              <label id="label-diagnosis" htmlFor="select-diagnosis" className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+              <label id="label-diagnosis" htmlFor="select-diagnosis" className="text-[11px] font-semibold text-slate-700 flex items-center gap-1.5">
                 <Activity className="w-3.5 h-3.5 text-slate-400" />
                 Diagnosis Medis Utama
               </label>
@@ -185,7 +187,7 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
                 id="select-diagnosis"
                 value={diagnosis}
                 onChange={(e) => setDiagnosis(e.target.value as MedicalDiagnosis)}
-                className="w-full bg-white/75 border border-slate-200 focus:border-red-500 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300 appearance-none font-medium shadow-xs"
+                className="w-full bg-white border border-slate-200 focus:border-slate-400 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300 appearance-none font-medium"
               >
                 <option value="Diabetes">Diabetes Melitus (Deteksi Kadar Gula)</option>
                 <option value="Kolesterol">Hiperkolesterolemia (Kolesterol Tinggi)</option>
@@ -194,11 +196,11 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
               </select>
               
               {/* Dynamic Diet Rule Box based on selected Diagnosis */}
-              <div id="diagnosis-guideline-box" className="p-3 bg-red-500/5 border border-red-500/10 backdrop-blur-md rounded-xl text-slate-700 space-y-1">
-                <span className="text-[10px] font-bold uppercase text-brand-danger tracking-wider flex items-center gap-1">
-                  <Sparkles className="w-3 h-3" /> Rekomendasi Diet Nutri Track:
+              <div id="diagnosis-guideline-box" className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 space-y-1">
+                <span className="text-[10px] font-semibold uppercase text-slate-500 tracking-wider flex items-center gap-1">
+                  <Sparkles className="w-3 h-3" /> Rekomendasi Diet Nutri Track
                 </span>
-                <p className="text-[11px] leading-relaxed font-sans mt-0.5 font-medium text-slate-600">
+                <p className="text-[11px] leading-relaxed mt-0.5 text-slate-600">
                   {getDiagnosisDescription(diagnosis)}
                 </p>
               </div>
@@ -206,7 +208,7 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
 
             {/* Target Weight */}
             <div className="space-y-1">
-              <label id="label-target-weight" htmlFor="input-target-weight" className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+              <label id="label-target-weight" htmlFor="input-target-weight" className="text-[11px] font-semibold text-slate-700 flex items-center gap-1.5">
                 <Scale className="w-3.5 h-3.5 text-slate-400" />
                 Target Berat Badan (kg)
               </label>
@@ -220,7 +222,7 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
                   onChange={(e) => setTargetWeight(Number(e.target.value))}
                   placeholder="Contoh: 65"
                   required
-                  className="w-full bg-white/75 border border-slate-200 focus:border-red-500 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300 pl-10 shadow-xs"
+                  className="w-full bg-white border border-slate-200 focus:border-slate-400 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300 pl-10"
                 />
                 <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400">
                   kg
@@ -230,7 +232,7 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
 
             {/* Routine Medication */}
             <div className="space-y-1">
-              <label id="label-medication" htmlFor="input-medication" className="text-[11px] font-bold text-slate-700 block mb-1">
+              <label id="label-medication" htmlFor="input-medication" className="text-[11px] font-semibold text-slate-700 block mb-1">
                 <Pill className="w-3.5 h-3.5 text-slate-400 inline mr-1" />
                 Obat Rutin Konsumsi (Optional)
               </label>
@@ -240,7 +242,7 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
                 value={routineMedication}
                 onChange={(e) => setRoutineMedication(e.target.value)}
                 placeholder="Contoh: Metformin 500mg, Allopurinol"
-                className="w-full bg-white/75 border border-slate-200 focus:border-red-500 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300 shadow-xs"
+                className="w-full bg-white border border-slate-200 focus:border-slate-400 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300"
               />
             </div>
           </div>
@@ -260,30 +262,30 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
         {isSaved && (
           <div 
             id="toast-profile-saved" 
-            className="mt-3 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-800 text-xs font-medium text-center animate-pulse flex items-center justify-center gap-2"
+            className="mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700 text-xs font-medium text-center flex items-center justify-center gap-2"
           >
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-            <span>Profil diperbarui! Aturan diet otomatis terintegrasi.</span>
+            <span>Profil diperbarui. Aturan diet otomatis terintegrasi.</span>
           </div>
         )}
       </div>
 
       {/* Checklist Overview Cards */}
       <div id="instruction-cards" className="grid grid-cols-2 gap-3 pb-6">
-        <div id="guided-card-1" className="glass rounded-2xl p-4 flex flex-col justify-between">
-          <div className="w-7 h-7 bg-amber-500/10 border border-amber-500/25 rounded-lg flex items-center justify-center text-amber-600 mb-2">
+        <div id="guided-card-1" className="rounded-2xl border border-slate-200 bg-white p-4 flex flex-col justify-between shadow-sm">
+          <div className="w-7 h-7 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-center text-amber-600 mb-2">
             <QrCode className="w-4 h-4" />
           </div>
-          <span className="text-[11px] font-bold text-slate-850 leading-tight">1. Ambil Foto</span>
+          <span className="text-[11px] font-semibold text-slate-800 leading-tight">1. Ambil Foto</span>
           <p className="text-[10px] text-slate-500 mt-1 leading-normal">
             Gunakan kamera HP di warteg/padang untuk menganalisis gizi kilat.
           </p>
         </div>
-        <div id="guided-card-2" className="glass rounded-2xl p-4 flex flex-col justify-between">
-          <div className="w-7 h-7 bg-indigo-500/10 border border-indigo-500/25 rounded-lg flex items-center justify-center text-indigo-600 mb-2">
+        <div id="guided-card-2" className="rounded-2xl border border-slate-200 bg-white p-4 flex flex-col justify-between shadow-sm">
+          <div className="w-7 h-7 bg-indigo-50 border border-indigo-200 rounded-lg flex items-center justify-center text-indigo-600 mb-2">
             <ArrowRight className="w-4 h-4" />
           </div>
-          <span className="text-[11px] font-bold text-slate-850 leading-tight">2. Lihat Alternatif</span>
+          <span className="text-[11px] font-semibold text-slate-800 leading-tight">2. Lihat Alternatif</span>
           <p className="text-[10px] text-slate-500 mt-1 leading-normal">
             Bila melanggar diagnosis, cari jalan sehat pintas lewat menu rekomendasi.
           </p>

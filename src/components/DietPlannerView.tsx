@@ -280,41 +280,41 @@ export default function DietPlannerView({ currentProfile, onSaveToHistory, histo
     <div id="diet-planner-tab" className="animate-fade-in space-y-4">
       
       {/* Weekly Safety Score Progress Banner */}
-      <div className="glass p-5 rounded-3xl shadow-md relative overflow-hidden flex items-center justify-between">
-        <div className="space-y-1 z-10 max-w-[180px]">
-          <span className="text-[9px] bg-red-500/10 text-[#eb4d4b] font-bold px-2 py-0.5 rounded-md uppercase tracking-wide border border-red-500/15">
+      <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm flex items-center justify-between">
+        <div className="space-y-2 max-w-[190px]">
+          <span className="text-[9px] bg-rose-50 text-rose-600 font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide border border-rose-200">
             Target: {diagnosis}
           </span>
-          <h3 className="text-sm font-extrabold text-slate-900 tracking-tight pt-1">
+          <h3 className="text-sm font-semibold text-slate-900 tracking-tight">
             Skor Diet Mingguan
           </h3>
-          <p className="text-[10px] text-slate-500 leading-relaxed font-semibold">
+          <p className="text-[10px] text-slate-500 leading-relaxed">
             {progressMetrics.totalEaten === 0 
               ? 'Tandai menu harian yang dimakan untuk menilai konsistensi gizi Anda.' 
-              : `Hebat! ${progressMetrics.eatenSafe} dari ${progressMetrics.totalEaten} makanan Anda tergolong AMAN.`}
+              : `Hebat! ${progressMetrics.eatenSafe} dari ${progressMetrics.totalEaten} makanan Anda tergolong aman.`}
           </p>
         </div>
 
         {/* Dynamic percentage circular meter */}
-        <div className="relative w-22 h-22 flex items-center justify-center shrink-0">
+        <div className="relative w-20 h-20 flex items-center justify-center shrink-0">
           <svg className="w-full h-full transform -rotate-90">
-            <circle cx="44" cy="44" r="34" stroke="rgba(0,0,0,0.05)" strokeWidth="6" fill="transparent" />
+            <circle cx="40" cy="40" r="30" stroke="#e2e8f0" strokeWidth="6" fill="transparent" />
             <circle 
-              cx="44" 
-              cy="44" 
-              r="34" 
+              cx="40" 
+              cy="40" 
+              r="30" 
               stroke={progressMetrics.score >= 70 ? '#10b981' : progressMetrics.score >= 50 ? '#f59e0b' : '#eb4d4b'} 
               strokeWidth="6" 
               fill="transparent" 
-              strokeDasharray={2 * Math.PI * 34}
-              strokeDashoffset={2 * Math.PI * 34 * (1 - progressMetrics.score / 100)}
+              strokeDasharray={2 * Math.PI * 30}
+              strokeDashoffset={2 * Math.PI * 30 * (1 - progressMetrics.score / 100)}
               strokeLinecap="round"
               className="transition-all duration-500"
             />
           </svg>
           <div className="absolute text-center">
-            <span className="text-lg font-black text-slate-900 leading-none block">{progressMetrics.score}%</span>
-            <span className="text-[8px] font-bold text-slate-400 uppercase tracking-tighter">Safe Ratio</span>
+            <span className="text-base font-semibold text-slate-900 leading-none block">{progressMetrics.score}%</span>
+            <span className="text-[8px] font-semibold text-slate-400 uppercase tracking-widest">Safe Ratio</span>
           </div>
         </div>
       </div>
