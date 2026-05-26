@@ -80,6 +80,36 @@ export default function App() {
     return [];
   });
 
+  const [confirmDialog, setConfirmDialog] = useState<{
+    open: boolean;
+    title: string;
+    message: string;
+    onConfirm: (() => void) | null;
+  }>({
+    open: false,
+    title: '',
+    message: '',
+    onConfirm: null
+  });
+
+  const openConfirmDialog = (title: string, message: string, onConfirm: () => void) => {
+    setConfirmDialog({
+      open: true,
+      title,
+      message,
+      onConfirm
+    });
+  };
+
+  const closeConfirmDialog = () => {
+    setConfirmDialog({
+      open: false,
+      title: '',
+      message: '',
+      onConfirm: null
+    });
+  };
+
   // Handlers
   const handleOnboardingComplete = () => {
     try {
@@ -101,7 +131,7 @@ export default function App() {
   };
 
   const handleLogout = () => {
-    if (window.confirm('Apakah Anda yakin ingin keluar dari akun?')) {
+    openConfirmDialog('Keluar akun', 'Apakah Anda yakin ingin keluar dari akun?', () => {
       try {
         localStorage.removeItem(CURRENT_USER_SESSION_KEY);
       } catch (e) {
@@ -109,7 +139,8 @@ export default function App() {
       }
       setCurrentUser(null);
       setActiveTab('scan');
-    }
+      closeConfirmDialog();
+    });
   };
 
   // Save Health Profile on modifications
@@ -165,14 +196,15 @@ export default function App() {
 
   // Erase history list
   const handleClearHistory = () => {
-    if (window.confirm('Apakah Anda yakin ingin menghapus seluruh riwayat scan gizi Anda?')) {
+    openConfirmDialog('Hapus riwayat', 'Apakah Anda yakin ingin menghapus seluruh riwayat scan gizi Anda?', () => {
       setHistoryList([]);
       try {
         localStorage.removeItem(HISTORY_LOCALSTORAGE_KEY);
       } catch (err) {
         console.error('Failed to clear history:', err);
       }
-    }
+      closeConfirmDialog();
+    });
   };
 
   // Render view conditional state machine
@@ -236,6 +268,31 @@ export default function App() {
             </div>
           )}
         </Layout>
+      )}
+
+      {confirmDialog.open && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-5">
+          <div className="w-full max-w-[340px] rounded-2xl border border-slate-200 bg-white p-5 shadow-xl">
+            <div className="space-y-1">
+              <h3 className="text-sm font-semibold text-slate-900">{confirmDialog.title}</h3>
+              <p className="text-xs text-slate-500">{confirmDialog.message}</p>
+            </div>
+            <div className="mt-5 flex items-center justify-end gap-2">
+              <button
+                onClick={closeConfirmDialog}
+                className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+              >
+                Batal
+              </button>
+              <button
+                onClick={() => confirmDialog.onConfirm?.()}
+                className="rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800"
+              >
+                Ya, lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
