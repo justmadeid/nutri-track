@@ -126,7 +126,7 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Contoh: Bpk. Made Wiratman (48th)"
+                placeholder="Contoh: Made Wiratman"
                 required
                 className="w-full bg-white border border-slate-200 focus:border-slate-400 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300"
               />
@@ -143,7 +143,7 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Contoh: made.wira@gmail.com"
+                placeholder="Contoh: made@domain.com"
                 required
                 className="w-full bg-white border border-slate-200 focus:border-slate-400 p-2.5 rounded-xl text-xs text-slate-800 focus:outline-none transition-all duration-300"
               />

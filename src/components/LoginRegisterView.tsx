@@ -56,18 +56,18 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
     } catch (e) {
       console.error('Failed to parse users db', e);
     }
-    // Inject default user "Bpk. Rahardjo" if free database is empty for friendly walkthroughs!
+    // Inject default user "Made" if free database is empty for friendly walkthroughs!
     return [
       {
-        username: 'rahardjo',
-        fullName: 'Bpk. Rahardjo (54th)',
-        password: 'password123',
-        email: 'rahardjo@warungsehat.com',
+        username: 'made',
+        fullName: 'Made',
+        password: 'made123',
+        email: 'made@domain.com',
         allergies: 'Tidak ada alergi bawaan khusus',
         profile: {
           diagnosis: 'Kolesterol',
           targetWeight: 70,
-          routineMedication: 'Simvastatin 20mg'
+          routineMedication: ''
         }
       }
     ];
@@ -565,12 +565,6 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
                     </div>
                   </button>
                 </div>
-
-                <div className="bg-amber-50 rounded-2xl p-3 border border-amber-500/10 flex items-start gap-2 text-[10px] font-semibold text-amber-800 leading-relaxed">
-                  <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                  <span>Sistem Nutri Track akan otomatis memproses asupan lokal warteg Anda dengan filter status dan ambang batas klinis dari diagnosis terpilih.</span>
-                </div>
-
                 {/* Navigation Buttons for Step 3 */}
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <button
@@ -594,26 +588,6 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
             )}
           </div>
         )}
-      </div>
-
-      {/* Practical Walkthrough Demo Guide Widget */}
-      <div className="bg-white/30 backdrop-blur-md rounded-2xl p-4 border border-white/20 text-slate-600 shadow-xs">
-        <span className="text-[9px] font-bold uppercase text-[#eb4d4b] tracking-wider block mb-1">
-          💡 Tips Akses Akun Demo Instan:
-        </span>
-        <div className="space-y-1 text-[10px] leading-relaxed font-semibold">
-          <div className="flex gap-1 items-start">
-            <CornerDownRight className="w-3 h-3 text-[#eb4d4b] shrink-0 mt-0.5" />
-            <span>Username: <strong className="text-slate-900">rahardjo</strong></span>
-          </div>
-          <div className="flex gap-1 items-start">
-            <CornerDownRight className="w-3 h-3 text-[#eb4d4b] shrink-0 mt-0.5" />
-            <span>Password: <strong className="text-slate-900">password123</strong></span>
-          </div>
-          <p className="text-[9px] text-slate-500 leading-normal font-sans italic pt-1">
-            Gunakan akun demo diatas untuk langsung mencoba profile bawaan dengan kondisi Kolesterol harian.
-          </p>
-        </div>
       </div>
 
     </div>
