@@ -1,0 +1,10 @@
+{
+  "name": "Nutri Track",
+  "description": "Pendamping gizi berbasis AI untuk analisis makanan lokal Indonesia berdasarkan kondisi medis (Diabetes, Asam Urat, Kolesterol, Obesitas).",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
