@@ -86,10 +86,10 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
   // Time Greeting Calculation
   const greetingText = useMemo(() => {
     const hours = new Date().getHours();
-    if (hours < 11) return 'Selamat Pagi 🌅';
-    if (hours < 15) return 'Selamat Siang ☀️';
-    if (hours < 19) return 'Selamat Sore 🌇';
-    return 'Selamat Malam 🌙';
+    if (hours < 11) return 'Selamat Pagi';
+    if (hours < 15) return 'Selamat Siang';
+    if (hours < 19) return 'Selamat Sore';
+    return 'Selamat Malam';
   }, []);
 
   // Day Name Calculation
@@ -258,12 +258,6 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
             {greetingText}. Mari pantau terus asupan nutrisi lokal Anda agar tetap seimbang dengan diagnosa <span className="font-bold text-[#eb4d4b]">{diagnosis}</span>.
           </p>
         </div>
-        
-        {/* Decorative Badge icon */}
-        <div className="w-16 h-16 rounded-2xl bg-white/70 shadow-inner flex items-center justify-center border border-white shrink-0 relative">
-          <Sparkles className="w-8 h-8 text-amber-500 animate-pulse" />
-          <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-red-500 border-2 border-white flex items-center justify-center text-[8px] text-white font-black">!</span>
-        </div>
       </div>
 
       {/* Calories Overview Widget */}
@@ -393,17 +387,17 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
       {/* Clinical Food Recommendation Section */}
       <div className="space-y-3">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Compass className="w-4 h-4 text-emerald-600" />
-            <h4 className="text-xs font-black text-slate-900 font-display">
+            <h4 className="text-sm font-semibold text-slate-900">
               Rekomendasi Kuliner ({diagnosis})
             </h4>
           </div>
           <button 
             onClick={() => setActiveTab('planner')}
-            className="text-[9.5px] font-extrabold text-[#eb4d4b] hover:underline"
+            className="text-[10px] font-semibold text-slate-500 hover:text-slate-700"
           >
-            Lihat Agenda &raquo;
+            Lihat Agenda
           </button>
         </div>
 
@@ -412,7 +406,7 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
           {RECOMMENDED_FOOD_CARDS[diagnosis]?.map((item, id) => (
             <div 
               key={id}
-              className="bg-white rounded-2xl w-[190px] border border-slate-200/65 overflow-hidden shrink-0 shadow-xs flex flex-col relative"
+              className="bg-white rounded-2xl w-[190px] border border-slate-200 overflow-hidden shrink-0 shadow-sm flex flex-col"
             >
               <div className="w-full h-24 overflow-hidden relative">
                 <img 
@@ -421,23 +415,22 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[8.5px] font-black uppercase text-emerald-800 bg-emerald-50 border border-emerald-250/30 leading-none">
+                <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[8px] font-semibold uppercase text-emerald-700 bg-white/90 border border-emerald-200 leading-none">
                   {item.tag}
                 </span>
               </div>
               <div className="p-3 flex-1 flex flex-col justify-between space-y-1">
-                <h5 className="text-[11px] font-black text-slate-900">{item.title}</h5>
-                <p className="text-[9.5px] text-slate-500 leading-normal font-medium flex-1">
+                <h5 className="text-[12px] font-semibold text-slate-900">{item.title}</h5>
+                <p className="text-[10px] text-slate-500 leading-relaxed font-medium flex-1">
                   {item.desc}
                 </p>
-                <div className="pt-2 flex justify-end">
-                  <button 
-                    onClick={() => setActiveTab('planner')}
-                    className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-[9px] font-extrabold text-slate-700 flex items-center justify-center"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                  </button>
-                </div>
+                <button 
+                  onClick={() => setActiveTab('planner')}
+                  className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold text-slate-500 hover:text-slate-700"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  Tambah
+                </button>
               </div>
             </div>
           ))}
@@ -445,11 +438,11 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
       </div>
 
       {/* Emergency Clinical Tip Card */}
-      <div className="glass p-4 rounded-3xl border border-rose-500/10 bg-red-50/20 shadow-xs flex items-start gap-3">
-        <ShieldAlert className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm flex items-start gap-3">
+        <ShieldAlert className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
         <div className="space-y-1">
-          <span className="text-[9px] font-black text-red-600 block tracking-wide">Pemberitahuan Proteksi Medis</span>
-          <p className="text-[10px] text-slate-600 leading-relaxed font-semibold">
+          <span className="text-[10px] font-semibold text-rose-600 block tracking-wide">Pemberitahuan Proteksi Medis</span>
+          <p className="text-[10px] text-slate-500 leading-relaxed">
             Pastikan untuk selalu melakukan cross-check dengan dokter gizi utama Anda. Nutri Track dirancang berbasis rekomendasi umum kuliner warteg di Indonesia agar risiko kambuhnya penyakit Anda tetap terkontrol.
           </p>
         </div>
