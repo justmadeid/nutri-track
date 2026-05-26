@@ -230,39 +230,39 @@ export default function DashboardView({ currentProfile, historyList }: Dashboard
   }, [historyList, currentProfile.diagnosis]);
 
   return (
-    <div id="dashboard-view-tab" className="px-5 py-4 animate-fade-in space-y-5">
+    <div id="dashboard-view-tab" className="px-5 py-5 animate-fade-in space-y-6 bg-white">
       
       {/* Target Status Bar Card */}
-      <div id="stats-banner-card" className="glass p-5 rounded-3xl shadow-md grid grid-cols-3 gap-2 text-center">
+      <div id="stats-banner-card" className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm grid grid-cols-3 gap-2 text-center">
         <div id="scorecard-total">
-          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-display">Total Menu</p>
-          <p className="text-xl font-extrabold text-slate-900 mt-0.5">{statsScorecard.total}</p>
-          <span className="text-[9px] text-slate-500 font-medium">Dimakan</span>
+          <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Total Menu</p>
+          <p className="text-xl font-semibold text-slate-900 mt-1">{statsScorecard.total}</p>
+          <span className="text-[9px] text-slate-500">Dimakan</span>
         </div>
-        <div id="scorecard-target" className="border-x border-white/25">
-          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-display">Makanan Aman</p>
-          <p className="text-xl font-extrabold text-emerald-600 mt-0.5">{statsScorecard.safePercent}%</p>
-          <span className="text-[9px] text-slate-500 font-medium">Rapat Gizi</span>
+        <div id="scorecard-target" className="border-x border-slate-200">
+          <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Makanan Aman</p>
+          <p className="text-xl font-semibold text-emerald-600 mt-1">{statsScorecard.safePercent}%</p>
+          <span className="text-[9px] text-slate-500">Rapat Gizi</span>
         </div>
         <div id="scorecard-streak">
-          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-display">Konsistensi</p>
-          <p className="text-xl font-extrabold text-slate-900 mt-0.5">
+          <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Konsistensi</p>
+          <p className="text-xl font-semibold text-slate-900 mt-1">
             {statsScorecard.streak} Hari
           </p>
-          <span className="text-[9px] text-emerald-600 font-bold font-sans">Streak aktif</span>
+          <span className="text-[9px] text-emerald-600 font-semibold">Streak aktif</span>
         </div>
       </div>
 
       {/* Visual Recharts Trend Line Container */}
-      <div id="trendline-chart-card" className="glass p-4 rounded-3xl shadow-md space-y-3">
-        <div className="flex items-center justify-between pb-2 border-b border-white/20">
+      <div id="trendline-chart-card" className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm space-y-3">
+        <div className="flex items-center justify-between pb-2 border-b border-slate-200">
           <div className="flex items-center gap-1.5">
             <TrendingUp className="w-4 h-4 text-brand-danger" />
-            <h3 className="text-xs font-bold text-slate-900 font-display">
+            <h3 className="text-sm font-semibold text-slate-900">
               Riwayat Makan Sepekan Terakhir
             </h3>
           </div>
-          <span className="text-[9px] bg-slate-900/10 text-slate-700 font-mono font-bold px-2 py-0.5 rounded-sm">
+          <span className="text-[9px] bg-slate-100 text-slate-600 font-semibold px-2 py-0.5 rounded-full">
             Harian
           </span>
         </div>
@@ -274,7 +274,7 @@ export default function DashboardView({ currentProfile, historyList }: Dashboard
               data={chartData}
               margin={{ top: 5, right: 10, left: -20, bottom: 5 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.25)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis 
                 dataKey="dateStr" 
                 tickLine={false} 
@@ -290,12 +290,10 @@ export default function DashboardView({ currentProfile, historyList }: Dashboard
               />
               <Tooltip 
                 contentStyle={{ 
-                  background: 'rgba(255, 255, 255, 0.8)', 
-                  backdropFilter: 'blur(10px)',
-                  WebkitBackdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.4)',
-                  borderRadius: '16px',
-                  boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.04)',
+                  background: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '12px',
+                  boxShadow: '0 6px 20px rgba(15, 23, 42, 0.08)',
                   fontSize: '10px'
                 }} 
               />
@@ -328,9 +326,9 @@ export default function DashboardView({ currentProfile, historyList }: Dashboard
           </ResponsiveContainer>
         </div>
 
-        <div className="flex items-center gap-1.5 p-2 bg-white/30 backdrop-blur-md rounded-xl border border-white/20 text-slate-600 justify-center">
-          <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500" />
-          <span className="text-[9px] font-semibold font-sans">
+        <div className="flex items-center gap-1.5 p-2 rounded-xl border border-slate-200 text-slate-600 justify-center bg-slate-50">
+          <Heart className="w-3.5 h-3.5 text-rose-500" />
+          <span className="text-[9px] font-semibold">
             Meningkatkan rasio makanan hijau menurunkan bahaya relaps klinis.
           </span>
         </div>
@@ -338,9 +336,9 @@ export default function DashboardView({ currentProfile, historyList }: Dashboard
 
       {/* Localized RM Padang & Warteg Health Swap Alternatives */}
       <div id="menu-swaps-accordion" className="space-y-3">
-        <div id="swaps-header" className="flex items-center gap-1.5 pb-1">
+        <div id="swaps-header" className="flex items-center gap-2 pb-1">
           <Utensils className="w-4 h-4 text-emerald-600" />
-          <h3 className="text-xs font-bold text-slate-900 font-display">
+          <h3 className="text-sm font-semibold text-slate-900">
             Saran Alternatif Menu Lokal ({currentProfile.diagnosis})
           </h3>
         </div>
@@ -350,14 +348,14 @@ export default function DashboardView({ currentProfile, historyList }: Dashboard
             <div 
               key={alt.id} 
               id={`alt-item-${alt.id}`}
-              className="glass p-4 rounded-3xl space-y-3 hover:border-white/40 transition-all duration-300"
+              className="rounded-3xl border border-slate-200 bg-white p-4 space-y-3 shadow-sm"
             >
               {/* Header Badge */}
               <div className="flex items-center justify-between">
-                <span className="text-[9px] bg-emerald-500/10 text-emerald-800 font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wide border border-emerald-500/20">
+                <span className="text-[9px] bg-emerald-50 text-emerald-700 font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide border border-emerald-200">
                   {alt.restaurant_type}
                 </span>
-                <span className="text-[10px] font-bold font-mono text-slate-500">
+                <span className="text-[10px] font-semibold text-slate-500">
                   Target: {currentProfile.diagnosis}
                 </span>
               </div>
@@ -366,21 +364,21 @@ export default function DashboardView({ currentProfile, historyList }: Dashboard
               <div className="grid grid-cols-1 gap-2.5 relative">
                 
                 {/* Red warning meal box */}
-                <div className="p-2.5 rounded-xl border-l-[3px] border-[#eb4d4b] bg-red-500/5 text-slate-700">
+                <div className="p-3 rounded-2xl border border-rose-200 bg-rose-50/40 text-slate-700">
                   <div className="flex gap-1.5 items-center">
-                    <span className="text-[8px] font-bold text-[#eb4d4b] tracking-wider uppercase">Sebaiknya Batasi:</span>
+                    <span className="text-[9px] font-semibold text-rose-600 tracking-wider uppercase">Sebaiknya Batasi</span>
                   </div>
-                  <p className="text-[11px] font-bold text-slate-800 mt-1">
+                  <p className="text-[12px] font-semibold text-slate-800 mt-1">
                     {alt.original_item}
                   </p>
                 </div>
 
                 {/* Green swap target meal box */}
-                <div className="p-2.5 rounded-xl border-l-[3px] border-emerald-500 bg-emerald-500/5 text-slate-700">
+                <div className="p-3 rounded-2xl border border-emerald-200 bg-emerald-50/40 text-slate-700">
                   <div className="flex gap-1.5 items-center">
-                    <span className="text-[8px] font-bold text-emerald-600 tracking-wider uppercase">Lebih Direkomendasikan:</span>
+                    <span className="text-[9px] font-semibold text-emerald-600 tracking-wider uppercase">Lebih Direkomendasikan</span>
                   </div>
-                  <p className="text-[11px] font-bold text-teal-900 mt-1">
+                  <p className="text-[12px] font-semibold text-teal-900 mt-1">
                     {alt.alternative_item}
                   </p>
                 </div>
@@ -388,7 +386,7 @@ export default function DashboardView({ currentProfile, historyList }: Dashboard
               </div>
 
               {/* Supportive Medical Explanation */}
-              <div className="text-[10.5px] text-slate-650 leading-relaxed bg-white/20 backdrop-blur-md border border-white/25 p-2.5 rounded-xl font-sans flex items-start gap-1.5">
+              <div className="text-[10.5px] text-slate-600 leading-relaxed bg-slate-50 border border-slate-200 p-2.5 rounded-2xl flex items-start gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0 mt-0.5" />
                 <span>
                   <strong>Alasan Medis:</strong> {alt.reason}
