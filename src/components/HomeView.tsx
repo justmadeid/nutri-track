@@ -315,103 +315,79 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
         </div>
 
         {/* Quick checkoff checklist for today */}
-        <div className="grid grid-cols-3 gap-2 pt-1 border-t border-slate-200/40">
+        <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-200">
           <button
             onClick={() => handleQuickToggle('pagi')}
-            className={`p-2.5 rounded-2xl border text-left transition-all relative flex flex-col justify-between h-[92px] ${
+            className={`p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between h-[86px] ${
               todayPlan.pagi.isEaten 
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-slate-800 shadow-xs' 
-                : 'bg-white/50 border-slate-250 hover:border-slate-350 text-slate-700'
+                ? 'bg-emerald-50 border-emerald-200 text-slate-800' 
+                : 'bg-white border-slate-200 hover:border-slate-300 text-slate-700'
             }`}
           >
-            <span className="text-[8.5px] font-bold text-slate-400 block tracking-wider uppercase">SARAPAN</span>
-            <span className="text-[10px] font-extrabold text-slate-900 leading-snug truncate w-full pt-1">
+            <span className="text-[9px] font-semibold text-slate-400 block tracking-wider uppercase">Sarapan</span>
+            <span className="text-[11px] font-semibold text-slate-900 leading-snug truncate w-full pt-1">
               {todayPlan.pagi.name.split(' + ')[0]}
             </span>
-            <div className="flex justify-between items-end w-full mt-1.5">
-              <div className="flex flex-col text-left">
-                <span className="text-[8.5px] font-extrabold text-slate-700 leading-none">320 kkal</span>
-                <span className="text-[7px] text-slate-400 font-bold leading-none mt-0.5">K:40g P:12g</span>
-              </div>
-              <CheckCircle className={`w-4 h-4 shrink-0 transition-all ${
-                todayPlan.pagi.isEaten ? 'text-emerald-500 fill-emerald-500' : 'text-slate-300'
-              }`} />
+            <div className="flex justify-between items-end w-full mt-2">
+              <span className="text-[9px] font-semibold text-slate-500">320 kkal</span>
+              <span className={`flex h-5 w-5 items-center justify-center rounded-full transition-all ${
+                todayPlan.pagi.isEaten ? 'bg-emerald-500' : 'border border-slate-300'
+              }`}>
+                <CheckCircle className={`h-3.5 w-3.5 ${
+                  todayPlan.pagi.isEaten ? 'text-white' : 'text-slate-300'
+                }`} />
+              </span>
             </div>
           </button>
 
           <button
             onClick={() => handleQuickToggle('siang')}
-            className={`p-2.5 rounded-2xl border text-left transition-all relative flex flex-col justify-between h-[92px] ${
+            className={`p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between h-[86px] ${
               todayPlan.siang.isEaten 
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-slate-800 shadow-xs' 
-                : 'bg-white/50 border-slate-250 hover:border-slate-350 text-slate-700'
+                ? 'bg-emerald-50 border-emerald-200 text-slate-800' 
+                : 'bg-white border-slate-200 hover:border-slate-300 text-slate-700'
             }`}
           >
-            <span className="text-[8.5px] font-bold text-slate-400 block tracking-wider uppercase">SIANG</span>
-            <span className="text-[10px] font-extrabold text-slate-900 leading-snug truncate w-full pt-1">
+            <span className="text-[9px] font-semibold text-slate-400 block tracking-wider uppercase">Siang</span>
+            <span className="text-[11px] font-semibold text-slate-900 leading-snug truncate w-full pt-1">
               {todayPlan.siang.name.split(' + ')[0]}
             </span>
-            <div className="flex justify-between items-end w-full mt-1.5">
-              <div className="flex flex-col text-left">
-                <span className="text-[8.5px] font-extrabold text-slate-700 leading-none">580 kkal</span>
-                <span className="text-[7px] text-slate-400 font-bold leading-none mt-0.5">K:75g P:28g</span>
-              </div>
-              <CheckCircle className={`w-4 h-4 shrink-0 transition-all ${
-                todayPlan.siang.isEaten ? 'text-emerald-500 fill-emerald-500' : 'text-slate-300'
-              }`} />
+            <div className="flex justify-between items-end w-full mt-2">
+              <span className="text-[9px] font-semibold text-slate-500">580 kkal</span>
+              <span className={`flex h-5 w-5 items-center justify-center rounded-full transition-all ${
+                todayPlan.siang.isEaten ? 'bg-emerald-500' : 'border border-slate-300'
+              }`}>
+                <CheckCircle className={`h-3.5 w-3.5 ${
+                  todayPlan.siang.isEaten ? 'text-white' : 'text-slate-300'
+                }`} />
+              </span>
             </div>
           </button>
 
           <button
             onClick={() => handleQuickToggle('malam')}
-            className={`p-2.5 rounded-2xl border text-left transition-all relative flex flex-col justify-between h-[92px] ${
+            className={`p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between h-[86px] ${
               todayPlan.malam.isEaten 
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-slate-800 shadow-xs' 
-                : 'bg-white/50 border-slate-250 hover:border-slate-350 text-slate-700'
+                ? 'bg-emerald-50 border-emerald-200 text-slate-800' 
+                : 'bg-white border-slate-200 hover:border-slate-300 text-slate-700'
             }`}
           >
-            <span className="text-[8.5px] font-bold text-slate-400 block tracking-wider uppercase">MALAM</span>
-            <span className="text-[10px] font-extrabold text-slate-900 leading-snug truncate w-full pt-1">
+            <span className="text-[9px] font-semibold text-slate-400 block tracking-wider uppercase">Malam</span>
+            <span className="text-[11px] font-semibold text-slate-900 leading-snug truncate w-full pt-1">
               {todayPlan.malam.name.split(' + ')[0]}
             </span>
-            <div className="flex justify-between items-end w-full mt-1.5">
-              <div className="flex flex-col text-left">
-                <span className="text-[8.5px] font-extrabold text-slate-700 leading-none">440 kkal</span>
-                <span className="text-[7px] text-slate-400 font-bold leading-none mt-0.5">K:55g P:22g</span>
-              </div>
-              <CheckCircle className={`w-4 h-4 shrink-0 transition-all ${
-                todayPlan.malam.isEaten ? 'text-emerald-500 fill-emerald-500' : 'text-slate-300'
-              }`} />
+            <div className="flex justify-between items-end w-full mt-2">
+              <span className="text-[9px] font-semibold text-slate-500">440 kkal</span>
+              <span className={`flex h-5 w-5 items-center justify-center rounded-full transition-all ${
+                todayPlan.malam.isEaten ? 'bg-emerald-500' : 'border border-slate-300'
+              }`}>
+                <CheckCircle className={`h-3.5 w-3.5 ${
+                  todayPlan.malam.isEaten ? 'text-white' : 'text-slate-300'
+                }`} />
+              </span>
             </div>
           </button>
         </div>
-      </div>
-
-      {/* Install App - PWA Promoted Widget */}
-      <div className="p-4 rounded-3xl bg-slate-950 text-white relative overflow-hidden shadow-md flex items-center justify-between">
-        {/* Animated background lines */}
-        <div className="absolute top-0 right-0 w-24 h-24 bg-red-650 opacity-15 blur-xl rounded-full"></div>
-        
-        <div className="space-y-1 z-10">
-          <div className="flex items-center gap-1">
-            <Smartphone className="w-3.5 h-3.5 text-red-400" />
-            <span className="text-[9px] font-black text-red-400 uppercase tracking-widest">Installable App</span>
-          </div>
-          <h4 className="text-xs font-black tracking-tight text-white font-display">
-            Pasang Pintasan Nutri Track
-          </h4>
-          <p className="text-[9.5px] text-slate-400 font-semibold max-w-[210px] leading-tight">
-            Gunakan sebagai aplikasi native di smartphone Anda untuk scan makanan lebih cepat!
-          </p>
-        </div>
-
-        <button
-          onClick={() => setShowPwaModal(true)}
-          className="bg-brand-danger hover:bg-red-600 text-white font-extrabold text-[10px] px-3.5 py-2.5 rounded-2xl flex items-center gap-1 shadow-md active:scale-95 transition-all shrink-0 z-10"
-        >
-          <Download className="w-3 h-3" />
-          <span>Pasang</span>
-        </button>
       </div>
 
       {/* Clinical Food Recommendation Section */}

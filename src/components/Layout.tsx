@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, QrCode, TrendingUp, Sparkles, Shield, Heart, Calendar, Home } from 'lucide-react';
+import { User, QrCode, TrendingUp, Sparkles, Shield, Heart, Calendar, Home, Camera } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -56,9 +56,6 @@ export default function Layout({
                 </p>
               </div>
             </div>
-            <div className="w-9 h-9 rounded-full bg-white/60 backdrop-blur-md flex items-center justify-center border border-white/40 shadow-xs">
-              <Sparkles className="w-4 h-4 text-amber-500" />
-            </div>
           </header>
         )}
 
@@ -74,22 +71,22 @@ export default function Layout({
         {!hideFooter && setActiveTab && (
           <nav 
             id="bottom-navigation-bar" 
-            className="absolute bottom-0 left-0 right-0 h-22 glass-nav shadow-[0_-4px_25px_-5px_rgba(0,0,0,0.08)] px-2 flex items-center justify-around z-35 pb-2"
+            className="absolute bottom-0 left-0 right-0 h-[86px] bg-white border-t border-slate-200/70 shadow-[0_-4px_25px_-5px_rgba(0,0,0,0.08)] px-3 pt-2 pb-3 flex items-end justify-between gap-1 z-35"
           >
             {/* Overview / Home Tab Link */}
             <button
               id="nav-tab-home"
               onClick={() => setActiveTab('home')}
-              className={`flex flex-col items-center gap-1 py-1 px-1.5 transition-all duration-300 relative shrink-0 ${
+              className={`flex flex-1 flex-col items-center justify-end gap-1 py-1 transition-all duration-300 relative min-w-0 ${
                 activeTab === 'home' 
                   ? 'text-brand-danger font-semibold scale-105' 
                   : 'text-slate-400 hover:text-slate-600'
               }`}
             >
               <Home className={`w-5 h-5 transition-all duration-300 ${activeTab === 'home' ? 'stroke-[2.5px] text-brand-danger' : 'stroke-2'}`} />
-              <span className="text-[9.5px] tracking-wide font-display mt-px">Beranda</span>
+              <span className="text-[10px] tracking-wide font-display leading-none">Beranda</span>
               {activeTab === 'home' && (
-                <span className="absolute bottom-[-6px] w-4 h-1 bg-brand-danger rounded-full"></span>
+                <span className="absolute bottom-[-4px] w-4 h-1 bg-brand-danger rounded-full"></span>
               )}
             </button>
 
@@ -97,16 +94,16 @@ export default function Layout({
             <button
               id="nav-tab-dashboard"
               onClick={() => setActiveTab('dashboard')}
-              className={`flex flex-col items-center gap-1 py-1 px-1.5 transition-all duration-300 relative shrink-0 ${
+              className={`flex flex-1 flex-col items-center justify-end gap-1 py-1 transition-all duration-300 relative min-w-0 ${
                 activeTab === 'dashboard' 
                   ? 'text-brand-danger font-semibold scale-105' 
                   : 'text-slate-400 hover:text-slate-600'
               }`}
             >
               <TrendingUp className={`w-5 h-5 transition-all duration-300 ${activeTab === 'dashboard' ? 'stroke-[2.5px] text-brand-danger' : 'stroke-2'}`} />
-              <span className="text-[9.5px] tracking-wide font-display mt-px">Grafik Tren</span>
+              <span className="text-[10px] tracking-wide font-display leading-none">Grafik Tren</span>
               {activeTab === 'dashboard' && (
-                <span className="absolute bottom-[-6px] w-4 h-1 bg-brand-danger rounded-full"></span>
+                <span className="absolute bottom-[-4px] w-4 h-1 bg-brand-danger rounded-full"></span>
               )}
             </button>
 
@@ -114,32 +111,32 @@ export default function Layout({
             <button
               id="nav-tab-scan"
               onClick={() => setActiveTab('scan')}
-              className={`flex flex-col items-center gap-1 transition-all duration-300 relative shrink-0 -mt-7`}
+              className="flex flex-1 flex-col items-center justify-end gap-1 transition-all duration-300 relative min-w-0 -mt-7"
             >
               <div className={`p-3.5 rounded-full shadow-lg transition-all duration-300 ${
                 activeTab === 'scan' 
                   ? 'bg-brand-danger text-white scale-110 shadow-red-500/20 ring-4 ring-red-500/15' 
                   : 'bg-white text-slate-500 hover:text-slate-705 border border-slate-200 hover:shadow-md'
               }`}>
-                <QrCode className="w-6 h-6 stroke-[2.25px]" />
+                <Camera className="w-6 h-6 stroke-[2.25px]" />
               </div>
-              <span className={`text-[9.5px] tracking-wide font-display pt-1 ${activeTab === 'scan' ? 'text-brand-danger font-bold' : 'text-slate-400'}`}>Scan Gizi</span>
+              <span className={`text-[10px] tracking-wide font-display leading-none pt-1 ${activeTab === 'scan' ? 'text-brand-danger font-bold' : 'text-slate-400'}`}>Scan Gizi</span>
             </button>
 
             {/* Diet Planner Tab Link */}
             <button
               id="nav-tab-planner"
               onClick={() => setActiveTab('planner')}
-              className={`flex flex-col items-center gap-1 py-1 px-1.5 transition-all duration-300 relative shrink-0 ${
+              className={`flex flex-1 flex-col items-center justify-end gap-1 py-1 transition-all duration-300 relative min-w-0 ${
                 activeTab === 'planner' 
                   ? 'text-brand-danger font-semibold scale-105' 
                   : 'text-slate-400 hover:text-slate-600'
               }`}
             >
               <Calendar className={`w-5 h-5 transition-all duration-300 ${activeTab === 'planner' ? 'stroke-[2.5px] text-brand-danger' : 'stroke-2'}`} />
-              <span className="text-[9.5px] tracking-wide font-display mt-px">Planner</span>
+              <span className="text-[10px] tracking-wide font-display leading-none">Planner</span>
               {activeTab === 'planner' && (
-                <span className="absolute bottom-[-6px] w-4 h-1 bg-brand-danger rounded-full"></span>
+                <span className="absolute bottom-[-4px] w-4 h-1 bg-brand-danger rounded-full"></span>
               )}
             </button>
 
@@ -147,16 +144,16 @@ export default function Layout({
             <button
               id="nav-tab-profile"
               onClick={() => setActiveTab('profile')}
-              className={`flex flex-col items-center gap-1 py-1 px-1.5 transition-all duration-300 relative shrink-0 ${
+              className={`flex flex-1 flex-col items-center justify-end gap-1 py-1 transition-all duration-300 relative min-w-0 ${
                 activeTab === 'profile' 
                   ? 'text-brand-danger font-semibold scale-105' 
                   : 'text-slate-400 hover:text-slate-600'
               }`}
             >
               <User className={`w-5 h-5 transition-all duration-300 ${activeTab === 'profile' ? 'stroke-[2.5px] text-brand-danger' : 'stroke-2'}`} />
-              <span className="text-[9.5px] tracking-wide font-display mt-px">Profil</span>
+              <span className="text-[10px] tracking-wide font-display leading-none">Profil</span>
               {activeTab === 'profile' && (
-                <span className="absolute bottom-[-6px] w-4 h-1 bg-brand-danger rounded-full"></span>
+                <span className="absolute bottom-[-4px] w-4 h-1 bg-brand-danger rounded-full"></span>
               )}
             </button>
           </nav>
