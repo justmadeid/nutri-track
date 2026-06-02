@@ -203,8 +203,8 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
       
       {/* Brand Visualizer */}
       <div className="text-center space-y-1 mt-2">
-        <div className="w-12 h-12 bg-red-500/10 border border-red-500/25 rounded-2xl flex items-center justify-center text-[#eb4d4b] mx-auto shadow-xs">
-          <ShieldCheck className="w-6 h-6" strokeWidth={2.5} />
+        <div className="flex items-center justify-center mx-auto">
+          <img src="/icons/logo.png" alt="Nutri Track Logo" className="w-24" />
         </div>
         <h2 className="text-xl font-extrabold text-slate-900 tracking-tight font-display pt-2">
           Gerbang Nutri Track
@@ -321,7 +321,7 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
             <button
               id="login-submit-button"
               type="submit"
-              className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 active:scale-95 mt-2"
+              className="w-full py-3 bg-red-500 hover:bg-red-650 text-white font-extrabold text-xs rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 active:scale-95 mt-2"
             >
               <span>Masuk Aplikasi</span>
               <ArrowRight className="w-4 h-4" />

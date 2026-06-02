@@ -72,7 +72,7 @@
 }
 
 .splash-bg {
-  background: linear-gradient(160deg, #ffffff 0%, #f8fafc 60%, #eef2ff 100%);
+  background: #ffffff;
   position: relative;
   overflow: hidden;
 }

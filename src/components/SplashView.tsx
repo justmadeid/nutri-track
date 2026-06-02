@@ -20,9 +20,7 @@ export default function SplashView({ onFinish, durationMs = 1600 }: SplashViewPr
       <div className="splash-lines" />
 
       <div className="mb-6 flex items-center justify-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <ShieldCheck className="h-8 w-8 text-emerald-600" />
-        </div>
+        <img src="/icons/logo.png" alt="Nutri Track Logo" className="w-32" />
       </div>
 
       <p className="text-[10px] font-mono uppercase tracking-[0.35em] text-slate-500">Nutri Track</p>

@@ -28,8 +28,7 @@ export default function Layout({
         {/* Phone Notch/Header for desktop preview */}
         <div id="device-notch" className="hidden md:flex justify-between items-center px-6 pt-3 pb-2 bg-white/45 backdrop-blur-md text-slate-800 text-xs font-mono font-medium z-40 border-b border-white/20">
           <div className="flex items-center gap-1">
-            <Heart className="w-3 h-3 text-red-500 fill-red-500" />
-            <span>Nutri Track Live</span>
+
           </div>
           <div className="w-16 h-4 bg-slate-900 rounded-full mx-auto -mt-1 absolute left-1/2 -translate-x-1/2"></div>
           <div className="flex items-center gap-1.5">
@@ -44,9 +43,6 @@ export default function Layout({
         {!hideHeader && (
           <header id="screen-header" className="px-5 py-4 flex items-center justify-between border-b border-white/30 bg-white/45 backdrop-blur-md sticky top-0 z-30">
             <div className="flex items-center gap-2">
-              <div className="w-9 h-9 bg-brand-danger/10 rounded-xl flex items-center justify-center text-brand-danger shadow-xs">
-                <Shield className="w-5 h-5" strokeWidth={2.5} />
-              </div>
               <div>
                 <h1 className="text-lg font-bold font-display text-slate-900 tracking-tight leading-tight">
                   {appName}

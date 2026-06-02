@@ -258,6 +258,7 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
             {greetingText}. Mari pantau terus asupan nutrisi lokal Anda agar tetap seimbang dengan diagnosa <span className="font-bold text-[#eb4d4b]">{diagnosis}</span>.
           </p>
         </div>
+        <img src="/icons/salad.png" alt="Salad Icon" className="w-32 -rotate-12 opacity-80" />
       </div>
 
       {/* Calories Overview Widget */}

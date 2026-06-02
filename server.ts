@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import os from 'os';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI, Type } from '@google/genai';
 import dotenv from 'dotenv';
@@ -7,11 +8,27 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const LOCAL_PORT = Number(process.env.LOCAL_PORT || 3000);
+const PUBLIC_PORT = Number(process.env.PUBLIC_PORT || 3001);
 
 // Enable large payloads for image transfers
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
+
+const getLocalAddresses = () => {
+  const interfaces = os.networkInterfaces();
+  const results: string[] = [];
+
+  Object.values(interfaces).forEach((ifaceList) => {
+    ifaceList?.forEach((iface) => {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        results.push(iface.address);
+      }
+    });
+  });
+
+  return results;
+};
 
 // Initialize Gemini Client safely
 let aiClient: GoogleGenAI | null = null;
@@ -83,7 +100,7 @@ Format Output JSON (Wajib) sesuai skema yang disediakan.`;
       console.log(`Analyzing food photo for diagnosis: ${targetDiagnosis} using Gemini 3.5 Flash...`);
       
       const response = await aiClient.models.generateContent({
-        model: 'gemini-3.5-flash',
+        model: 'gemini-3-flash-preview',
         contents: [
           {
             inlineData: {
@@ -347,6 +364,21 @@ Format Output JSON (Wajib) sesuai skema yang disediakan.`;
   } catch (err: any) {
     console.error('Scan error:', err);
     res.status(500).json({ error: 'Terjadi kegagalan saat menganalisis makanan: ' + err.message });
+  }
+});
+
+app.listen(LOCAL_PORT, '127.0.0.1', () => {
+  console.log(`Local server: http://localhost:${LOCAL_PORT}`);
+});
+
+app.listen(PUBLIC_PORT, '0.0.0.0', () => {
+  const localUrls = getLocalAddresses();
+  console.log(`Public server: http://0.0.0.0:${PUBLIC_PORT}`);
+  if (localUrls.length) {
+    console.log('Available on:');
+    localUrls.forEach((addr) => {
+      console.log(`  http://${addr}:${PUBLIC_PORT}`);
+    });
   }
 });
 
