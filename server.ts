@@ -11,9 +11,33 @@ const app = express();
 const LOCAL_PORT = Number(process.env.LOCAL_PORT || 3000);
 const PUBLIC_PORT = Number(process.env.PUBLIC_PORT || 3001);
 
+// ─── CORS — izinkan Capacitor native app & web browser ───────────
+const ALLOWED_ORIGINS = [
+  'capacitor://localhost',       // Android Capacitor
+  'ionic://localhost',           // alternatif scheme
+  'http://localhost',
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://nutri-track-ebon.vercel.app',  // Vercel production
+];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin || '';
+  if (ALLOWED_ORIGINS.includes(origin) || !origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
 // Enable large payloads for image transfers
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
+
 
 const getLocalAddresses = () => {
   const interfaces = os.networkInterfaces();
@@ -100,7 +124,8 @@ Format Output JSON (Wajib) sesuai skema yang disediakan.`;
       console.log(`Analyzing food photo for diagnosis: ${targetDiagnosis} using Gemini 3.5 Flash...`);
       
       const response = await aiClient.models.generateContent({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-3.5-flash',
+        // model: 'gemini-3-flash-preview',
         contents: [
           {
             inlineData: {

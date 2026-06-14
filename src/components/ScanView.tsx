@@ -98,8 +98,12 @@ export default function ScanView({ currentProfile, onSaveToHistory, historyList,
     setAnalysisResult(null);
     setSaveSuccess(false);
 
+    // Capacitor native: pakai URL Vercel penuh. Web/dev: pakai /api/scan lokal
+    const apiBase = import.meta.env.VITE_API_BASE_URL || '';
+    const apiUrl = `${apiBase}/api/scan`;
+
     try {
-      const res = await fetch('/api/scan', {
+      const res = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
