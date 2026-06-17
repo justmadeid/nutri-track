@@ -279,6 +279,17 @@ export default function DietPlannerView({ currentProfile, onSaveToHistory, histo
   return (
     <div id="diet-planner-tab" className="animate-fade-in space-y-4">
       
+      {/* Diet Planner Medical Disclaimer */}
+      <div className="bg-amber-500/10 border border-amber-500/20 rounded-3xl p-4 flex gap-3 items-start shadow-sm">
+        <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+        <div className="space-y-1">
+          <h4 className="text-xs font-bold text-amber-800">Proteksi Rencana Diet</h4>
+          <p className="text-[11px] text-amber-700 leading-relaxed font-medium">
+            Rencana makan mingguan di bawah merupakan rekomendasi kuliner umum dan bukan pengganti instruksi terapi gizi dari ahli gizi atau dokter. Harap diskusikan agenda diet ini sebelum diaplikasikan untuk kondisi klinis Anda.
+          </p>
+        </div>
+      </div>
+
       {/* Weekly Safety Score Progress Banner */}
       <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm flex items-center justify-between">
         <div className="space-y-2 max-w-[190px]">

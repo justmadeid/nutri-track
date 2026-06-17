@@ -401,6 +401,14 @@ export default function ScanView({ currentProfile, onSaveToHistory, historyList,
             </p>
           </div>
 
+          {/* AI Analysis Medical Disclaimer */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex gap-2.5 items-start text-slate-705">
+            <AlertTriangle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+            <p className="text-[10px] leading-relaxed font-medium">
+              <strong>Pemberitahuan:</strong> Hasil analisis gizi dan status risiko makanan di atas merupakan estimasi kecerdasan buatan (AI) berbasis informasi umum dan bukan merupakan saran medis formal. Selalu konsultasikan dengan dokter atau dokter gizi Anda sebelum mengonsumsi makanan yang berisiko bagi kondisi kesehatan Anda.
+            </p>
+          </div>
+
           {/* Buttons to Save to History */}
           <div className="pt-2 flex gap-2">
             <button

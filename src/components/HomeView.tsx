@@ -261,6 +261,17 @@ export default function HomeView({ currentProfile, currentUser, onSaveToHistory,
         <img src="/icons/salad.png" alt="Salad Icon" className="w-32 -rotate-12 opacity-80" />
       </div>
 
+      {/* Medical Warning Banner */}
+      <div className="bg-amber-500/10 border border-amber-500/20 rounded-3xl p-4 flex gap-3 items-start shadow-sm animate-fade-in">
+        <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+        <div className="space-y-1">
+          <h4 className="text-xs font-bold text-amber-800">Peringatan Medis & Proteksi</h4>
+          <p className="text-[11px] text-amber-700 leading-relaxed font-medium">
+            Rekomendasi asupan dan data gizi yang ditampilkan aplikasi ini bersifat informasi umum. Aplikasi ini tidak dapat menggantikan peran dokter gizi atau diagnosis klinis. Konsultasikan pola makan Anda dengan dokter atau ahli gizi profesional secara berkala.
+          </p>
+        </div>
+      </div>
+
       {/* Calories Overview Widget */}
       <div className="glass p-5 rounded-3xl shadow-md border border-white/40 space-y-4">
         <div className="flex items-center justify-between">

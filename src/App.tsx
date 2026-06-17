@@ -9,6 +9,7 @@ import DietPlannerView from './components/DietPlannerView';
 import OnboardingView from './components/OnboardingView';
 import SplashView from './components/SplashView';
 import LoginRegisterView from './components/LoginRegisterView';
+import { ShieldAlert } from 'lucide-react';
 
 const CURRENT_USER_SESSION_KEY = 'nutri_track_current_user_v1';
 const ONBOARDING_STATUS_KEY = 'nutri_track_onboarding_done_v2';
@@ -25,6 +26,14 @@ export default function App() {
   const [activeTab, setActiveTab ] = useState<'home' | 'profile' | 'scan' | 'dashboard' | 'planner'>('home');
 
   const [showSplash, setShowSplash] = useState(true);
+  const [showDisclaimer, setShowDisclaimer] = useState<boolean>(() => {
+    try {
+      const stored = localStorage.getItem('nutri_track_disclaimer_accepted_v1');
+      return stored !== 'true';
+    } catch (e) {
+      return true;
+    }
+  });
 
   // 1. Onboarding Completed State
   const [onboardingDone, setOnboardingDone] = useState<boolean>(() => {
@@ -289,6 +298,58 @@ export default function App() {
                 className="rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800"
               >
                 Ya, lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showDisclaimer && !showSplash && (
+        <div className="fixed inset-0 z-[100] bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-5 text-slate-800 animate-fade-in">
+          <div className="bg-white rounded-3xl w-full max-w-[360px] max-h-[85vh] flex flex-col shadow-2xl border border-slate-100 overflow-hidden">
+            {/* Header */}
+            <div className="px-5 py-4 bg-rose-600 text-white flex items-center gap-2 shrink-0">
+              <ShieldAlert className="w-5 h-5 text-white animate-pulse" />
+              <h3 className="text-sm font-extrabold tracking-tight">Pemberitahuan Medis Penting</h3>
+            </div>
+            {/* Body content */}
+            <div className="p-5 overflow-y-auto space-y-4 text-xs font-semibold leading-relaxed no-scrollbar">
+              <p className="text-slate-900 font-bold text-center border-b border-slate-100 pb-2.5">
+                PENTING: HARAP BACA SEBELUM MENGGUNAKAN APLIKASI
+              </p>
+              <p className="text-slate-600 font-medium">
+                Aplikasi <strong>Nutri Track</strong> menyediakan analisis makanan dan rekomendasi gizi berbasis kecerdasan buatan (AI) hanya sebagai sarana informasi dan edukasi.
+              </p>
+              <div className="space-y-2 bg-rose-50/70 border border-rose-100 p-3 rounded-2xl text-[11px] text-rose-800">
+                <p className="font-bold flex gap-1.5 items-start">
+                  <span>⚠️</span>
+                  <span>Bukan Diagnosis Medis</span>
+                </p>
+                <p className="font-medium pl-4">
+                  Aplikasi ini BUKAN alat diagnosis medis, BUKAN pengganti peran dokter, ahli gizi, atau tenaga kesehatan profesional.
+                </p>
+              </div>
+              <p className="text-slate-600 font-medium">
+                Setiap keputusan diet, pengobatan, atau perubahan pola makan tidak boleh didasarákan sepenuhnya pada rekomendasi aplikasi ini. Anda diwajibkan untuk tetap berkonsultasi dengan dokter gizi klinis atau ahli medis berlisensi untuk diagnosis dan rencana terapi medis Anda.
+              </p>
+              <p className="text-slate-650 font-medium">
+                Dengan menekan tombol setuju, Anda memahami dan menyetujui bahwa penggunaan aplikasi ini adalah keputusan mandiri Anda dengan tetap berada di bawah pengawasan medis profesional.
+              </p>
+            </div>
+            {/* Action */}
+            <div className="p-4 bg-slate-50 border-t border-slate-150 flex shrink-0">
+              <button
+                onClick={() => {
+                  try {
+                    localStorage.setItem('nutri_track_disclaimer_accepted_v1', 'true');
+                  } catch (e) {
+                    console.error(e);
+                  }
+                  setShowDisclaimer(false);
+                }}
+                className="w-full py-3 bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-extrabold rounded-2xl shadow-md transition-all text-center text-xs"
+              >
+                Saya Mengerti & Setuju
               </button>
             </div>
           </div>
