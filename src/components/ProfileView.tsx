@@ -291,6 +291,18 @@ export default function ProfileView({ onProfileChange, currentProfile, currentUs
           </p>
         </div>
       </div>
+      
+      {/* Privacy Policy Link */}
+      <div className="text-center pt-2 pb-6">
+        <a 
+          href="/privacy.html" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[10px] font-semibold text-slate-400 hover:text-slate-650 underline transition-all"
+        >
+          Kebijakan Privasi
+        </a>
+      </div>
     </div>
   );
 }

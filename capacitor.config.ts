@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.nutritrack.app',
+  appId: 'com.justmadeid.nutritrack',
   appName: 'Nutri Track',
   webDir: 'dist',
   server: {

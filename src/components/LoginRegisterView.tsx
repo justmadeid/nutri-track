@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { UserAccount, MedicalDiagnosis } from '../types';
-import { 
-  ShieldCheck, User, Lock, Activity, ArrowRight, CornerDownRight, 
+import {
+  ShieldCheck, User, Lock, Activity, ArrowRight, CornerDownRight,
   Mail, AlertCircle, CheckCircle2, ChevronRight, ChevronLeft, Check, Compass, Info
 } from 'lucide-react';
 
@@ -23,7 +23,7 @@ const COMMON_ALLERGENS = [
 
 export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewProps) {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
-  
+
   // Login Form States
   const [loginUsername, setLoginUsername] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -34,14 +34,14 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
   const [email, setEmail] = useState('');
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
-  
+
   // Step 2 Allergy States
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([]);
   const [customAllergy, setCustomAllergy] = useState('');
 
   // Step 3 Health Diagnosis State
   const [diagnosis, setDiagnosis] = useState<MedicalDiagnosis>('Diabetes');
-  
+
   // Info Feedbacks
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -85,7 +85,7 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
 
     const allUsers = getStoredUsers();
     const cleanUsername = loginUsername.trim().toLowerCase();
-    
+
     const matched = allUsers.find(
       u => u.username.toLowerCase() === cleanUsername && u.password === loginPassword
     );
@@ -136,7 +136,7 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
     setRegisterStep(3);
   };
 
-  const toggleAllergen = ( allergen: string ) => {
+  const toggleAllergen = (allergen: string) => {
     if (selectedAllergens.includes(allergen)) {
       setSelectedAllergens(selectedAllergens.filter(a => a !== allergen));
     } else {
@@ -163,8 +163,8 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
     // Compile allergy list
     let finalAllergies = selectedAllergens.join(', ');
     if (customAllergy.trim()) {
-      finalAllergies = finalAllergies 
-        ? `${finalAllergies}, ${customAllergy.trim()}` 
+      finalAllergies = finalAllergies
+        ? `${finalAllergies}, ${customAllergy.trim()}`
         : customAllergy.trim();
     }
     if (!finalAllergies) {
@@ -200,17 +200,17 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
 
   return (
     <div id="auth-main-container" className="flex flex-col h-full justify-center px-5 py-4 space-y-5 animate-fade-in">
-      
+
       {/* Brand Visualizer */}
       <div className="text-center space-y-1 mt-2">
         <div className="flex items-center justify-center mx-auto">
           <img src="/icons/logo.png" alt="Nutri Track Logo" className="w-24" />
         </div>
         <h2 className="text-xl font-extrabold text-slate-900 tracking-tight font-display pt-2">
-          Gerbang Nutri Track
+          Nutri Track
         </h2>
         <p className="text-xs text-slate-500 leading-normal max-w-[280px] mx-auto font-medium">
-          Asisten cerdas pendeteksi nutrisi & mitigasi penyakit klinis kuliner warteg.
+          Asisten cerdas pendeteksi nutrisi & mitigasi penyakit klinis dari foto Makanan.
         </p>
       </div>
 
@@ -222,11 +222,10 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
             setErrorMsg('');
             setSuccessMsg('');
           }}
-          className={`py-2 text-[11px] font-extrabold rounded-xl transition-all ${
-            activeTab === 'login' 
-              ? 'bg-white text-slate-900 shadow-sm' 
+          className={`py-2 text-[11px] font-extrabold rounded-xl transition-all ${activeTab === 'login'
+              ? 'bg-white text-slate-900 shadow-sm'
               : 'text-slate-500 hover:text-slate-800'
-          }`}
+            }`}
         >
           Masuk Akun
         </button>
@@ -237,11 +236,10 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
             setSuccessMsg('');
             setRegisterStep(1);
           }}
-          className={`py-2 text-[11px] font-extrabold rounded-xl transition-all ${
-            activeTab === 'register' 
-              ? 'bg-white text-slate-900 shadow-sm' 
+          className={`py-2 text-[11px] font-extrabold rounded-xl transition-all ${activeTab === 'register'
+              ? 'bg-white text-slate-900 shadow-sm'
               : 'text-slate-500 hover:text-slate-800'
-          }`}
+            }`}
         >
           Daftar Baru
         </button>
@@ -249,7 +247,7 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
 
       {/* Primary Container Box */}
       <div className="glass p-5 rounded-3xl space-y-4">
-        
+
         {/* Step Indicator on Register Tab */}
         {activeTab === 'register' && (
           <div className="space-y-2 border-b border-slate-200/40 pb-3">
@@ -257,7 +255,7 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
               <span className="uppercase tracking-widest text-[#eb4d4b]">LANGKAH DAFTAR</span>
               <span>Langkah {registerStep} dari 3</span>
             </div>
-            
+
             {/* Horizontal progress indicators */}
             <div className="grid grid-cols-3 gap-2">
               <div className={`h-1.5 rounded-full transition-all duration-350 ${registerStep >= 1 ? 'bg-red-500' : 'bg-slate-200'}`}></div>
@@ -408,7 +406,7 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
                   <span className="text-[11px] font-extrabold text-slate-700 block mb-1">
                     Pilih Alergi Makanan Anda (Bisa Lebih dari Satu):
                   </span>
-                  
+
                   {/* Allergen Interactive grid pills wrapper */}
                   <div className="flex flex-wrap gap-2">
                     {COMMON_ALLERGENS.map((allergen, idx) => {
@@ -418,15 +416,13 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
                           key={idx}
                           type="button"
                           onClick={() => toggleAllergen(allergen)}
-                          className={`px-3 py-2 text-xs font-bold rounded-2xl border transition-all text-left flex items-center gap-1.5 ${
-                            isSelected 
-                              ? 'bg-rose-500/10 border-rose-500/30 text-rose-700' 
+                          className={`px-3 py-2 text-xs font-bold rounded-2xl border transition-all text-left flex items-center gap-1.5 ${isSelected
+                              ? 'bg-rose-500/10 border-rose-500/30 text-rose-700'
                               : 'bg-white/50 border-slate-200 text-slate-650 hover:bg-slate-100/50'
-                          }`}
+                            }`}
                         >
-                          <span className={`w-3.5 h-3.5 rounded-md border flex items-center justify-center shrink-0 ${
-                            isSelected ? 'bg-rose-500 border-rose-500 text-white' : 'border-slate-300 bg-white'
-                          }`}>
+                          <span className={`w-3.5 h-3.5 rounded-md border flex items-center justify-center shrink-0 ${isSelected ? 'bg-rose-500 border-rose-500 text-white' : 'border-slate-300 bg-white'
+                            }`}>
                             {isSelected && <Check className="w-2.5 h-2.5 stroke-[3px]" />}
                           </span>
                           <span>{allergen}</span>
@@ -488,11 +484,10 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
                   <button
                     type="button"
                     onClick={() => setDiagnosis('Diabetes')}
-                    className={`p-3 text-left rounded-2xl border transition-all flex items-start gap-3 h-auto ${
-                      diagnosis === 'Diabetes'
+                    className={`p-3 text-left rounded-2xl border transition-all flex items-start gap-3 h-auto ${diagnosis === 'Diabetes'
                         ? 'bg-rose-500/10 border-rose-500/40 text-slate-800 shadow-xs'
                         : 'bg-white/50 border-slate-200 text-slate-600 hover:bg-slate-100/30'
-                    }`}
+                      }`}
                   >
                     <div className={`w-8 h-8 rounded-xl shrink-0 flex items-center justify-center font-bold ${diagnosis === 'Diabetes' ? 'bg-red-500 text-white' : 'bg-slate-100 text-slate-550'}`}>
                       D
@@ -508,11 +503,10 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
                   <button
                     type="button"
                     onClick={() => setDiagnosis('Kolesterol')}
-                    className={`p-3 text-left rounded-2xl border transition-all flex items-start gap-3 h-auto ${
-                      diagnosis === 'Kolesterol'
+                    className={`p-3 text-left rounded-2xl border transition-all flex items-start gap-3 h-auto ${diagnosis === 'Kolesterol'
                         ? 'bg-rose-500/10 border-rose-500/40 text-slate-800 shadow-xs'
                         : 'bg-white/50 border-slate-200 text-slate-600 hover:bg-slate-100/30'
-                    }`}
+                      }`}
                   >
                     <div className={`w-8 h-8 rounded-xl shrink-0 flex items-center justify-center font-bold ${diagnosis === 'Kolesterol' ? 'bg-red-500 text-white' : 'bg-slate-100 text-slate-550'}`}>
                       K
@@ -528,11 +522,10 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
                   <button
                     type="button"
                     onClick={() => setDiagnosis('Asam Urat')}
-                    className={`p-3 text-left rounded-2xl border transition-all flex items-start gap-3 h-auto ${
-                      diagnosis === 'Asam Urat'
+                    className={`p-3 text-left rounded-2xl border transition-all flex items-start gap-3 h-auto ${diagnosis === 'Asam Urat'
                         ? 'bg-rose-500/10 border-rose-500/40 text-slate-800 shadow-xs'
                         : 'bg-white/50 border-slate-200 text-slate-600 hover:bg-slate-100/30'
-                    }`}
+                      }`}
                   >
                     <div className={`w-8 h-8 rounded-xl shrink-0 flex items-center justify-center font-bold ${diagnosis === 'Asam Urat' ? 'bg-red-500 text-white' : 'bg-slate-100 text-slate-550'}`}>
                       A
@@ -548,11 +541,10 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
                   <button
                     type="button"
                     onClick={() => setDiagnosis('Obesitas')}
-                    className={`p-3 text-left rounded-2xl border transition-all flex items-start gap-3 h-auto ${
-                      diagnosis === 'Obesitas'
+                    className={`p-3 text-left rounded-2xl border transition-all flex items-start gap-3 h-auto ${diagnosis === 'Obesitas'
                         ? 'bg-rose-500/10 border-rose-500/40 text-slate-800 shadow-xs'
                         : 'bg-white/50 border-slate-200 text-slate-600 hover:bg-slate-100/30'
-                    }`}
+                      }`}
                   >
                     <div className={`w-8 h-8 rounded-xl shrink-0 flex items-center justify-center font-bold ${diagnosis === 'Obesitas' ? 'bg-red-500 text-white' : 'bg-slate-100 text-slate-550'}`}>
                       O
@@ -588,6 +580,18 @@ export default function LoginRegisterView({ onLoginSuccess }: LoginRegisterViewP
             )}
           </div>
         )}
+      </div>
+
+      {/* Privacy Policy Link Footer */}
+      <div className="text-center pb-2">
+        <a 
+          href="/privacy.html" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[10px] font-semibold text-slate-400 hover:text-slate-600 underline transition-all"
+        >
+          Kebijakan Privasi (Privacy Policy)
+        </a>
       </div>
 
     </div>

@@ -1,13 +1,13 @@
 import express from 'express';
 import path from 'path';
 import os from 'os';
-import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI, Type } from '@google/genai';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const app = express();
+const PORT = Number(process.env.PORT || 3000);
 const LOCAL_PORT = Number(process.env.LOCAL_PORT || 3000);
 const PUBLIC_PORT = Number(process.env.PUBLIC_PORT || 3001);
 
@@ -392,46 +392,51 @@ Format Output JSON (Wajib) sesuai skema yang disediakan.`;
   }
 });
 
-app.listen(LOCAL_PORT, '127.0.0.1', () => {
-  console.log(`Local server: http://localhost:${LOCAL_PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(LOCAL_PORT, '127.0.0.1', () => {
+    console.log(`Local server: http://localhost:${LOCAL_PORT}`);
+  });
 
-app.listen(PUBLIC_PORT, '0.0.0.0', () => {
-  const localUrls = getLocalAddresses();
-  console.log(`Public server: http://0.0.0.0:${PUBLIC_PORT}`);
-  if (localUrls.length) {
-    console.log('Available on:');
-    localUrls.forEach((addr) => {
-      console.log(`  http://${addr}:${PUBLIC_PORT}`);
+  app.listen(PUBLIC_PORT, '0.0.0.0', () => {
+    const localUrls = getLocalAddresses();
+    console.log(`Public server: http://0.0.0.0:${PUBLIC_PORT}`);
+    if (localUrls.length) {
+      console.log('Available on:');
+      localUrls.forEach((addr) => {
+        console.log(`  http://${addr}:${PUBLIC_PORT}`);
+      });
+    }
+  });
+
+  // ----------------------
+  // VITE CLIENT DEV SERVER OR STATIC ASSETS ROUTING
+  // ----------------------
+  async function start() {
+    if (process.env.NODE_ENV !== 'production') {
+      const { createServer: createViteServer } = await import('vite');
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: 'spa',
+      });
+      app.use(vite.middlewares);
+      console.log('Vite development middleware integrated.');
+    } else {
+      const distPath = path.join(process.cwd(), 'dist');
+      app.use(express.static(distPath));
+      app.get('*', (req, res) => {
+        res.sendFile(path.join(distPath, 'index.html'));
+      });
+      console.log('Serving production static assets from dist/.');
+    }
+
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`Express application active on http://0.0.0.0:${PORT}`);
     });
   }
-});
 
-// ----------------------
-// VITE CLIENT DEV SERVER OR STATIC ASSETS ROUTING
-// ----------------------
-async function start() {
-  if (process.env.NODE_ENV !== 'production') {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-    console.log('Vite development middleware integrated.');
-  } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
-    console.log('Serving production static assets from dist/.');
-  }
-
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Express application active on http://0.0.0.0:${PORT}`);
+  start().catch((err) => {
+    console.error('Failed to launch application server:', err);
   });
 }
 
-start().catch((err) => {
-  console.error('Failed to launch application server:', err);
-});
+export default app;
