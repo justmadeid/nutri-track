@@ -98,7 +98,7 @@ app.post('/api/scan', async (req, res) => {
     // Parse base64 header if present
     let base64Data = image;
     let mimeType = 'image/jpeg';
-    
+
     if (image.startsWith('data:')) {
       const match = image.match(/^data:([^;]+);base64,(.+)$/);
       if (match) {
@@ -122,10 +122,10 @@ Format Output JSON (Wajib) sesuai skema yang disediakan.`;
 
     if (aiClient) {
       console.log(`Analyzing food photo for diagnosis: ${targetDiagnosis} using Gemini 3.5 Flash...`);
-      
+
       const response = await aiClient.models.generateContent({
-        model: 'gemini-3.5-flash',
-        // model: 'gemini-3-flash-preview',
+        // model: 'gemini-3.5-flash',
+        model: 'gemini-3-flash-preview',
         contents: [
           {
             inlineData: {
@@ -206,7 +206,7 @@ Format Output JSON (Wajib) sesuai skema yang disediakan.`;
 
       console.log('Gemini raw response:', responseText);
       const parsedData = JSON.parse(responseText.trim());
-      
+
       // Ensure risk_status is strict
       let status = parsedData.risk_status;
       if (!['Aman', 'Hati-hati', 'Berisiko Tinggi'].includes(status)) {
@@ -220,7 +220,7 @@ Format Output JSON (Wajib) sesuai skema yang disediakan.`;
     } else {
       // Graceful local fallback simulation when API key is missing
       console.log(`Running simulation analyzer for client - Diagnosis: ${targetDiagnosis}`);
-      
+
       // We simulate an response according to some common patterns or default
       const simulatedResponses: Record<string, Array<any>> = {
         'Diabetes': [
@@ -381,7 +381,7 @@ Format Output JSON (Wajib) sesuai skema yang disediakan.`;
       // Just pick a random item from options or cycle based on timestamp
       const index = Math.floor(Math.random() * options.length);
       const chosen = options[index];
-      
+
       // Artificial delay for loading experience
       await new Promise(resolve => setTimeout(resolve, 1500));
       return res.json(chosen);
