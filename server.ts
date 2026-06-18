@@ -16,6 +16,7 @@ const ALLOWED_ORIGINS = [
   'capacitor://localhost',       // Android Capacitor
   'ionic://localhost',           // alternatif scheme
   'http://localhost',
+  'https://localhost',           // Android Capacitor (https scheme)
   'http://localhost:3000',
   'http://localhost:5173',
   'https://nutri-track-ebon.vercel.app',  // Vercel production
